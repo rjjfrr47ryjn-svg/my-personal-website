@@ -1,1 +1,1559 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="My Digital World - Personal Website">
 
+<title>My Digital World</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Rajdhani',sans-serif;
+    background:
+        radial-gradient(circle at 20% 10%,rgba(0,225,255,.12),transparent 30%),
+        radial-gradient(circle at 80% 20%,rgba(170,0,255,.12),transparent 30%),
+        #050914;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+.bg{
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    overflow:hidden;
+}
+
+.grid{
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(0,220,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,220,255,.035) 1px,transparent 1px);
+    background-size:45px 45px;
+}
+
+.glow{
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:.25;
+}
+
+.g1{
+    background:#00eaff;
+    top:5%;
+    left:-100px;
+}
+
+.g2{
+    background:#a600ff;
+    right:-100px;
+    top:40%;
+}
+
+.g3{
+    background:#0066ff;
+    left:30%;
+    bottom:-150px;
+}
+
+/* LOADER */
+#loader{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#03060d;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    transition:.7s;
+}
+
+.loader-logo{
+    font-family:Orbitron;
+    font-size:28px;
+    letter-spacing:4px;
+    color:#00eaff;
+    text-shadow:0 0 25px #00eaff;
+}
+
+.loader-line{
+    width:180px;
+    height:3px;
+    background:#111a29;
+    margin-top:20px;
+    overflow:hidden;
+    border-radius:10px;
+}
+
+.loader-line span{
+    display:block;
+    width:40%;
+    height:100%;
+    background:#00eaff;
+    box-shadow:0 0 15px #00eaff;
+    animation:load 1.3s infinite;
+}
+
+@keyframes load{
+    from{transform:translateX(-100%)}
+    to{transform:translateX(350%)}
+}
+
+/* NAV */
+nav{
+    position:fixed;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:1000;
+    width:calc(100% - 28px);
+    max-width:1000px;
+    padding:10px 14px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:25px;
+    background:rgba(5,10,20,.72);
+    backdrop-filter:blur(18px);
+    box-shadow:0 10px 40px rgba(0,0,0,.3);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-family:Orbitron;
+    font-size:15px;
+    color:#00eaff;
+    letter-spacing:2px;
+}
+
+.navlinks{
+    display:flex;
+    gap:5px;
+}
+
+.navlinks a{
+    color:#aaa;
+    text-decoration:none;
+    padding:8px 11px;
+    border-radius:15px;
+    font-size:14px;
+    transition:.25s;
+}
+
+.navlinks a:hover{
+    color:#fff;
+    background:rgba(0,234,255,.1);
+}
+
+.menu{
+    display:none;
+    background:none;
+    border:0;
+    color:white;
+    font-size:25px;
+}
+
+/* GENERAL */
+section{
+    width:min(1100px,92%);
+    margin:auto;
+    padding:100px 0;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.title small{
+    color:#00eaff;
+    font-family:Orbitron;
+    letter-spacing:3px;
+}
+
+.title h2{
+    font-family:Orbitron;
+    font-size:clamp(28px,5vw,45px);
+    margin-top:10px;
+}
+
+.title p{
+    color:#8f9aaa;
+    max-width:600px;
+    margin:12px auto;
+}
+
+/* HERO */
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding-top:120px;
+}
+
+.hero-content{
+    max-width:800px;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 15px;
+    border:1px solid rgba(0,234,255,.2);
+    border-radius:30px;
+    background:rgba(0,234,255,.05);
+    color:#9cefff;
+    font-size:14px;
+}
+
+.status i{
+    width:8px;
+    height:8px;
+    background:#00ff88;
+    border-radius:50%;
+    box-shadow:0 0 12px #00ff88;
+}
+
+.hero h1{
+    font-family:Orbitron;
+    font-size:clamp(38px,9vw,85px);
+    line-height:1;
+    margin:28px 0 20px;
+}
+
+.gradient{
+    background:linear-gradient(90deg,#00eaff,#8b5cff,#ff3bd4);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:#9aa5b6;
+    font-size:19px;
+    line-height:1.6;
+}
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    text-decoration:none;
+    border:1px solid rgba(0,234,255,.35);
+    color:#fff;
+    padding:13px 22px;
+    border-radius:30px;
+    background:rgba(0,234,255,.07);
+    transition:.3s;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:16px;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 25px rgba(0,234,255,.2);
+}
+
+.btn.primary{
+    background:linear-gradient(90deg,#00bcd4,#735cff);
+    border:0;
+}
+
+/* CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.card{
+    padding:25px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.035);
+    border-radius:22px;
+    backdrop-filter:blur(10px);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(0,234,255,.25);
+}
+
+.icon{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.card h3{
+    font-family:Orbitron;
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#8f9aaa;
+    line-height:1.6;
+}
+
+/* ORBIT */
+.orbit-box{
+    height:420px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.core{
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:radial-gradient(circle,#172d42,#07101b);
+    border:2px solid #00eaff;
+    box-shadow:0 0 35px rgba(0,234,255,.35);
+    font-family:Orbitron;
+    font-size:13px;
+    text-align:center;
+    z-index:2;
+}
+
+.orbit{
+    position:absolute;
+    width:330px;
+    height:330px;
+    border:1px dashed rgba(0,234,255,.25);
+    border-radius:50%;
+    animation:spin 18s linear infinite;
+}
+
+.orbit span{
+    position:absolute;
+    padding:8px 13px;
+    border-radius:20px;
+    background:#091322;
+    border:1px solid rgba(255,255,255,.1);
+    color:#9cefff;
+    font-size:13px;
+}
+
+.o1{top:-12px;left:120px}
+.o2{right:-35px;top:140px}
+.o3{bottom:-12px;left:125px}
+.o4{left:-35px;top:140px}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
+
+/* SKILLS */
+.skill{
+    margin-bottom:22px;
+}
+
+.skill-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+}
+
+.skill-top span:first-child{
+    color:#ddd;
+}
+
+.skill-top span:last-child{
+    color:#00eaff;
+}
+
+.bar{
+    height:7px;
+    border-radius:10px;
+    background:#111a29;
+    overflow:hidden;
+}
+
+.bar span{
+    display:block;
+    height:100%;
+    border-radius:10px;
+    background:linear-gradient(90deg,#00eaff,#805cff);
+}
+
+/* PROJECT */
+.project{
+    position:relative;
+    overflow:hidden;
+}
+
+.project .tag{
+    color:#00eaff;
+    font-size:12px;
+    letter-spacing:2px;
+    margin-bottom:12px;
+}
+
+.project a{
+    display:inline-block;
+    margin-top:15px;
+    color:#fff;
+    text-decoration:none;
+}
+
+/* TIMELINE */
+.timeline{
+    position:relative;
+    max-width:750px;
+    margin:auto;
+}
+
+.timeline:before{
+    content:"";
+    position:absolute;
+    left:12px;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:linear-gradient(#00eaff,transparent);
+}
+
+.time-item{
+    position:relative;
+    padding-left:45px;
+    margin-bottom:35px;
+}
+
+.dot{
+    position:absolute;
+    left:5px;
+    top:4px;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#00eaff;
+    box-shadow:0 0 15px #00eaff;
+}
+
+.time-item h3{
+    font-family:Orbitron;
+    font-size:17px;
+}
+
+.time-item p{
+    color:#8994a6;
+    margin-top:7px;
+}
+
+/* GALLERY */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.gallery img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.3s;
+}
+
+.gallery img:hover{
+    transform:scale(1.025);
+    box-shadow:0 0 25px rgba(0,234,255,.15);
+}
+
+/* SOCIAL */
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.social{
+    text-decoration:none;
+    color:#ddd;
+    padding:13px 20px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.035);
+    transition:.3s;
+}
+
+.social:hover{
+    transform:translateY(-4px);
+    border-color:#00eaff;
+}
+
+/* APP STUDIO */
+.app-studio{
+    position:relative;
+    border:1px solid rgba(0,234,255,.18);
+    border-radius:28px;
+    padding:25px;
+    background:
+        linear-gradient(145deg,rgba(0,234,255,.05),rgba(120,50,255,.04)),
+        rgba(255,255,255,.025);
+    box-shadow:0 20px 70px rgba(0,0,0,.25);
+}
+
+.studio-header{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.studio-header h3{
+    font-family:Orbitron;
+    color:#fff;
+}
+
+.studio-header p{
+    color:#8290a3;
+    margin-top:5px;
+}
+
+.live{
+    white-space:nowrap;
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:12px;
+    color:#00ff9d;
+    background:rgba(0,255,157,.07);
+    border:1px solid rgba(0,255,157,.2);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+.field label{
+    color:#9da9ba;
+    font-size:14px;
+}
+
+.field input,
+.field textarea{
+    width:100%;
+    border:1px solid rgba(255,255,255,.1);
+    background:#070e19;
+    color:#fff;
+    border-radius:13px;
+    padding:13px;
+    outline:none;
+    font-family:inherit;
+}
+
+.field input:focus,
+.field textarea:focus{
+    border-color:#00eaff;
+    box-shadow:0 0 15px rgba(0,234,255,.08);
+}
+
+.field textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.upload{
+    border:1px dashed rgba(0,234,255,.25);
+    padding:18px;
+    border-radius:15px;
+    text-align:center;
+    color:#78869a;
+}
+
+.switches{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:18px;
+}
+
+.switch{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 13px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:12px;
+    color:#aeb7c5;
+}
+
+.switch input{
+    accent-color:#00eaff;
+}
+
+.build-area{
+    margin-top:25px;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.07);
+}
+
+.build-status{
+    margin-top:15px;
+    display:none;
+    padding:14px;
+    border-radius:12px;
+    background:#071321;
+    color:#7e91a8;
+}
+
+.progress{
+    height:5px;
+    background:#121b2a;
+    border-radius:10px;
+    margin-top:10px;
+    overflow:hidden;
+}
+
+.progress span{
+    display:block;
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#00eaff,#8b5cff);
+    transition:width .4s;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:50px 20px;
+    color:#687487;
+    border-top:1px solid rgba(255,255,255,.06);
+}
+
+footer strong{
+    color:#00eaff;
+}
+
+/* REVEAL */
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:.8s;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:none;
+}
+
+/* MOBILE */
+@media(max-width:750px){
+
+    nav{
+        top:10px;
+    }
+
+    .navlinks{
+        display:none;
+        position:absolute;
+        top:60px;
+        left:0;
+        right:0;
+        flex-direction:column;
+        background:rgba(5,10,20,.96);
+        padding:12px;
+        border:1px solid rgba(255,255,255,.08);
+        border-radius:20px;
+    }
+
+    .navlinks.active{
+        display:flex;
+    }
+
+    .navlinks a{
+        text-align:center;
+        padding:12px;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    section{
+        padding:80px 0;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .gallery{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .gallery img{
+        height:160px;
+    }
+
+    .orbit-box{
+        height:330px;
+    }
+
+    .orbit{
+        width:260px;
+        height:260px;
+    }
+
+    .o1{left:90px}
+    .o3{left:90px}
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .studio-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+}
+
+@media(max-width:420px){
+    .hero h1{
+        font-size:38px;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    .gallery img{
+        height:210px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg">
+    <div class="grid"></div>
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="glow g3"></div>
+</div>
+
+<!-- LOADER -->
+<div id="loader">
+    <div class="loader-logo">MY DIGITAL WORLD</div>
+    <div class="loader-line">
+        <span></span>
+    </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="logo">MDW.</div>
+
+    <div class="navlinks" id="navlinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#appstudio">App Studio</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <button class="menu" id="menu">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="hero-content reveal">
+
+        <div class="status">
+            <i></i>
+            DIGITAL WORLD ONLINE
+        </div>
+
+        <h1>
+            Welcome to<br>
+            <span class="gradient">My Digital World</span>
+        </h1>
+
+        <p>
+            This is my personal digital space —
+            my story, skills, projects, ideas and future
+            all in one place.
+        </p>
+
+        <div class="buttons">
+            <a class="btn primary" href="#about">Explore My World</a>
+            <a class="btn" href="#projects">View Projects</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+
+    <div class="title reveal">
+        <small>01 / ABOUT</small>
+        <h2>Who Am I?</h2>
+        <p>
+            Welcome to my digital world. এখানে আমার সম্পর্কে,
+            আমার কাজ এবং আমার তৈরি করা জিনিসগুলো থাকবে।
+        </p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card reveal">
+            <div class="icon">◈</div>
+            <h3>My Story</h3>
+            <p>
+                আমার journey, experience এবং future goals
+                এখানে ধীরে ধীরে যুক্ত হবে।
+            </p>
+        </div>
+
+        <div class="card reveal">
+            <div class="icon">⚡</div>
+            <h3>My Mission</h3>
+            <p>
+                নতুন কিছু শেখা, তৈরি করা এবং নিজের ideas
+                বাস্তবে নিয়ে আসাই আমার লক্ষ্য।
+            </p>
+        </div>
+
+        <div class="card reveal">
+            <div class="icon">∞</div>
+            <h3>My Future</h3>
+            <p>
+                Technology, creativity এবং digital projects
+                নিয়ে সামনে এগিয়ে যাওয়া।
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- DIGITAL ORBIT -->
+<section>
+
+    <div class="title reveal">
+        <small>02 / DIGITAL CORE</small>
+        <h2>My Digital Universe</h2>
+        <p>এক জায়গায় আমার digital world-এর বিভিন্ন অংশ।</p>
+    </div>
+
+    <div class="orbit-box reveal">
+
+        <div class="orbit">
+            <span class="o1">PROJECTS</span>
+            <span class="o2">IDEAS</span>
+            <span class="o3">SKILLS</span>
+            <span class="o4">FUTURE</span>
+        </div>
+
+        <div class="core">
+            MY<br>DIGITAL<br>WORLD
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+
+    <div class="title reveal">
+        <small>03 / SKILLS</small>
+        <h2>What I Can Do</h2>
+        <p>আমার শেখা এবং কাজের skill গুলো এখানে থাকবে।</p>
+    </div>
+
+    <div class="card reveal">
+
+        <div class="skill">
+            <div class="skill-top">
+                <span>HTML / CSS</span>
+                <span>85%</span>
+            </div>
+            <div class="bar">
+                <span style="width:85%"></span>
+            </div>
+        </div>
+
+        <div class="skill">
+            <div class="skill-top">
+                <span>JavaScript</span>
+                <span>70%</span>
+            </div>
+            <div class="bar">
+                <span style="width:70%"></span>
+            </div>
+        </div>
+
+        <div class="skill">
+            <div class="skill-top">
+                <span>UI / Design</span>
+                <span>80%</span>
+            </div>
+            <div class="bar">
+                <span style="width:80%"></span>
+            </div>
+        </div>
+
+        <div class="skill">
+            <div class="skill-top">
+                <span>Creative Ideas</span>
+                <span>95%</span>
+            </div>
+            <div class="bar">
+                <span style="width:95%"></span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+
+    <div class="title reveal">
+        <small>04 / PROJECTS</small>
+        <h2>My Projects</h2>
+        <p>আমি যেসব project তৈরি করছি বা করেছি।</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card project reveal">
+            <div class="tag">WEB PROJECT</div>
+            <h3>My Digital World</h3>
+            <p>
+                আমার নিজের interactive personal website।
+            </p>
+            <a href="#home">Explore →</a>
+        </div>
+
+        <div class="card project reveal">
+            <div class="tag">GAME PROJECT</div>
+            <h3>Trap Devil</h3>
+            <p>
+                Mobile-focused HTML game project.
+            </p>
+            <a href="#">Coming Soon →</a>
+        </div>
+
+        <div class="card project reveal">
+            <div class="tag">APP PROJECT</div>
+            <h3>App Studio</h3>
+            <p>
+                HTML project থেকে mobile app বানানোর
+                system তৈরি করার পরিকল্পনা।
+            </p>
+            <a href="#appstudio">Open Studio →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- TIMELINE -->
+<section>
+
+    <div class="title reveal">
+        <small>05 / JOURNEY</small>
+        <h2>My Timeline</h2>
+    </div>
+
+    <div class="timeline">
+
+        <div class="time-item reveal">
+            <div class="dot"></div>
+            <h3>Started Exploring</h3>
+            <p>
+                Technology এবং digital world নিয়ে
+                exploration শুরু।
+            </p>
+        </div>
+
+        <div class="time-item reveal">
+            <div class="dot"></div>
+            <h3>Started Building</h3>
+            <p>
+                Website, app এবং game project তৈরি শুরু।
+            </p>
+        </div>
+
+        <div class="time-item reveal">
+            <div class="dot"></div>
+            <h3>Building My Digital World</h3>
+            <p>
+                নিজের জন্য একটি unique digital identity তৈরি।
+            </p>
+        </div>
+
+        <div class="time-item reveal">
+            <div class="dot"></div>
+            <h3>Future</h3>
+            <p>
+                আরও বড় এবং advanced project আসছে।
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section>
+
+    <div class="title reveal">
+        <small>06 / GALLERY</small>
+        <h2>My Gallery</h2>
+        <p>
+            এখানে নিজের ছবি বা project screenshots রাখতে পারবে।
+        </p>
+    </div>
+
+    <div class="gallery reveal">
+        <img src="photo1.jpg" alt="Gallery 1">
+        <img src="photo2.jpg" alt="Gallery 2">
+        <img src="photo3.jpg" alt="Gallery 3">
+        <img src="photo4.jpg" alt="Gallery 4">
+        <img src="photo5.jpg" alt="Gallery 5">
+        <img src="photo6.jpg" alt="Gallery 6">
+    </div>
+
+</section>
+
+<!-- APP STUDIO -->
+<section id="appstudio">
+
+    <div class="title reveal">
+        <small>07 / APP STUDIO</small>
+        <h2>HTML → Mobile App</h2>
+        <p>
+            নিজের HTML project-কে mobile app হিসেবে
+            প্রস্তুত করার জন্য future build system।
+        </p>
+    </div>
+
+    <div class="app-studio reveal">
+
+        <div class="studio-header">
+
+            <div>
+                <h3>⚡ APP STUDIO</h3>
+                <p>Build your HTML project as a mobile app.</p>
+            </div>
+
+            <div class="live">
+                ● SYSTEM ONLINE
+            </div>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div class="field">
+                <label>App Name</label>
+                <input
+                    id="appName"
+                    type="text"
+                    placeholder="My Awesome App"
+                >
+            </div>
+
+            <div class="field">
+                <label>Package Name</label>
+                <input
+                    id="packageName"
+                    type="text"
+                    placeholder="com.example.myapp"
+                >
+            </div>
+
+            <div class="field full">
+
+                <label>Upload HTML File</label>
+
+                <div class="upload">
+
+                    <input
+                        id="htmlFile"
+                        type="file"
+                        accept=".html,.htm"
+                    >
+
+                    <p id="htmlFileName">
+                        Select your index.html
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="field full">
+
+                <label>Upload App Icon</label>
+
+                <div class="upload">
+
+                    <input
+                        id="iconFile"
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp"
+                    >
+
+                    <p id="iconFileName">
+                        PNG / JPG / WEBP
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="switches">
+
+            <label class="switch">
+                <input type="checkbox" checked>
+                Fullscreen
+            </label>
+
+            <label class="switch">
+                <input type="checkbox" checked>
+                Splash Screen
+            </label>
+
+            <label class="switch">
+                <input type="checkbox" checked>
+                Back Button
+            </label>
+
+        </div>
+
+        <div class="build-area">
+
+            <button
+                class="btn primary"
+                id="buildBtn"
+            >
+                BUILD MOBILE APP
+            </button>
+
+            <div
+                class="build-status"
+                id="buildStatus"
+            >
+
+                <div id="statusText">
+                    Preparing build...
+                </div>
+
+                <div class="progress">
+                    <span id="progressBar"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SOCIAL -->
+<section>
+
+    <div class="title reveal">
+        <small>08 / SOCIAL</small>
+        <h2>Find Me Online</h2>
+    </div>
+
+    <div class="socials reveal">
+
+        <a class="social"
+           href="https://facebook.com/"
+           target="_blank">
+            Facebook
+        </a>
+
+        <a class="social"
+           href="https://instagram.com/"
+           target="_blank">
+            Instagram
+        </a>
+
+        <a class="social"
+           href="https://tiktok.com/"
+           target="_blank">
+            TikTok
+        </a>
+
+        <a class="social"
+           href="https://wa.me/"
+           target="_blank">
+            WhatsApp
+        </a>
+
+        <a class="social"
+           href="https://github.com/"
+           target="_blank">
+            GitHub
+        </a>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+
+    <div class="title reveal">
+        <small>09 / CONTACT</small>
+        <h2>Contact Me</h2>
+        <p>
+            নিচের email নিজের email দিয়ে পরিবর্তন করবে।
+        </p>
+    </div>
+
+    <div class="card reveal" style="max-width:650px;margin:auto;text-align:center;">
+
+        <h3>Let's Connect</h3>
+
+        <p style="margin-top:10px;">
+            Have an idea, project or something interesting?
+        </p>
+
+        <div class="buttons">
+
+            <a
+                class="btn primary"
+                href="mailto:your@email.com"
+            >
+                Send Email
+            </a>
+
+            <button
+                class="btn"
+                id="shareBtn"
+            >
+                Share Website
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>
+        © <span id="year"></span>
+        <strong>My Digital World</strong>
+    </p>
+
+    <p style="margin-top:7px;">
+        Built with HTML • CSS • JavaScript
+    </p>
+</footer>
+
+<script>
+
+/* LOADER */
+window.addEventListener("load",function(){
+
+    setTimeout(function(){
+
+        document.getElementById("loader").style.opacity="0";
+
+        setTimeout(function(){
+            document.getElementById("loader").style.display="none";
+        },700);
+
+    },700);
+
+});
+
+
+/* MOBILE MENU */
+
+const menu=document.getElementById("menu");
+const navlinks=document.getElementById("navlinks");
+
+menu.addEventListener("click",function(){
+
+    navlinks.classList.toggle("active");
+
+});
+
+
+document.querySelectorAll(".navlinks a").forEach(function(link){
+
+    link.addEventListener("click",function(){
+
+        navlinks.classList.remove("active");
+
+    });
+
+});
+
+
+/* REVEAL ANIMATION */
+
+const observer=new IntersectionObserver(function(entries){
+
+    entries.forEach(function(entry){
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},{
+    threshold:.12
+});
+
+
+document.querySelectorAll(".reveal").forEach(function(element){
+
+    observer.observe(element);
+
+});
+
+
+/* YEAR */
+
+document.getElementById("year").textContent=
+new Date().getFullYear();
+
+
+/* HTML FILE */
+
+document.getElementById("htmlFile").addEventListener("change",function(){
+
+    const file=this.files[0];
+
+    if(file){
+
+        document.getElementById("htmlFileName").textContent=
+        "Selected: "+file.name;
+
+    }
+
+});
+
+
+/* ICON FILE */
+
+document.getElementById("iconFile").addEventListener("change",function(){
+
+    const file=this.files[0];
+
+    if(file){
+
+        document.getElementById("iconFileName").textContent=
+        "Selected: "+file.name;
+
+    }
+
+});
+
+
+/* BUILD BUTTON */
+
+document.getElementById("buildBtn").addEventListener("click",function(){
+
+    const appName=
+        document.getElementById("appName").value.trim();
+
+    const packageName=
+        document.getElementById("packageName").value.trim();
+
+    const htmlFile=
+        document.getElementById("htmlFile").files[0];
+
+    const status=
+        document.getElementById("buildStatus");
+
+    const statusText=
+        document.getElementById("statusText");
+
+    const progress=
+        document.getElementById("progressBar");
+
+
+    if(!appName){
+
+        alert("প্রথমে App Name লিখুন।");
+        return;
+
+    }
+
+
+    if(!packageName){
+
+        alert("Package Name লিখুন।");
+        return;
+
+    }
+
+
+    if(!htmlFile){
+
+        alert("একটি HTML file নির্বাচন করুন।");
+        return;
+
+    }
+
+
+    status.style.display="block";
+
+    let value=0;
+
+    statusText.textContent=
+        "Checking project...";
+
+    progress.style.width="10%";
+
+
+    const steps=[
+
+        [20,"Reading HTML project..."],
+
+        [40,"Preparing Android WebView..."],
+
+        [60,"Creating app configuration..."],
+
+        [80,"Preparing APK build..."],
+
+        [100,"Build system ready. APK compiler connection required."]
+
+    ];
+
+
+    let index=0;
+
+
+    const timer=setInterval(function(){
+
+        if(index>=steps.length){
+
+            clearInterval(timer);
+            return;
+
+        }
+
+
+        progress.style.width=
+            steps[index][0]+"%";
+
+        statusText.textContent=
+            steps[index][1];
+
+        index++;
+
+    },700);
+
+});
+
+
+/* SHARE */
+
+document.getElementById("shareBtn").addEventListener("click",async function(){
+
+    const shareData={
+        title:"My Digital World",
+        text:"Check out my digital world!",
+        url:window.location.href
+    };
+
+
+    if(navigator.share){
+
+        try{
+
+            await navigator.share(shareData);
+
+        }catch(error){}
+
+    }else{
+
+        try{
+
+            await navigator.clipboard.writeText(
+                window.location.href
+            );
+
+            alert("Website link copied!");
+
+        }catch(error){
+
+            alert("এই browser থেকে share করা যাচ্ছে না।");
+
+        }
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
