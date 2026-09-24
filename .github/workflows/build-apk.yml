@@ -1,4 +1,4 @@
- name: Build APK
+name: Build APK
 
 on:
   push:
@@ -24,23 +24,42 @@ jobs:
 
     - name: Create Simple Android Project
       run: |
-        mkdir -p android-app/app/src/main/assets
-        mkdir -p android-app/app/src/main/res/mipmap-hdpi
-        
-        # Copy index.html to Android Assets
-        cp index.html android-app/app/src/main/assets/index.html
+        mkdir -p myapp/app/src/main/assets
+        cp index.html myapp/app/src/main/assets/index.html
 
-        # Create AndroidManifest.xml
-        cat << 'EOF' > android-app/app/src/main/AndroidManifest.xml
+        mkdir -p myapp/app/src/main/java/com/web/app
+        cat << 'EOF' > myapp/app/src/main/java/com/web/app/MainActivity.java
+        package com.web.app;
+        import android.app.Activity;
+        import android.os.Bundle;
+        import android.webkit.WebView;
+        import android.webkit.WebViewClient;
+
+        public class MainActivity extends Activity {
+            private WebView w;
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                w = new WebView(this);
+                w.getSettings().setJavaScriptEnabled(true);
+                w.setWebViewClient(new WebViewClient());
+                w.loadUrl("file:///android_asset/index.html");
+                setContentView(w);
+            }
+            @Override
+            public void onBackPressed() {
+                if (w.canGoBack()) { w.goBack(); }
+                else { super.onBackPressed(); }
+            }
+        }
+        EOF
+
+        cat << 'EOF' > myapp/app/src/main/AndroidManifest.xml
         <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-            package="com.my.digitalworld">
+            package="com.web.app">
             <application
-                android:allowBackup="true"
-                android:icon="@mipmap/ic_launcher"
                 android:label="My Digital World"
-                android:roundIcon="@mipmap/ic_launcher"
-                android:supportsRtl="true"
-                android:theme="@style/Theme.AppCompat.NoActionBar">
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
                 <activity
                     android:name=".MainActivity"
                     android:exported="true">
@@ -53,46 +72,19 @@ jobs:
         </manifest>
         EOF
 
-        # Create MainActivity.java
-        mkdir -p android-app/app/src/main/java/com/my/digitalworld
-        cat << 'EOF' > android-app/app/src/main/java/com/my/digitalworld/MainActivity.java
-        package com.my.digitalworld;
-        import android.app.Activity;
-        import android.os.Bundle;
-        import android.webkit.WebView;
-        import android.webkit.WebViewClient;
-
-        public class MainActivity extends Activity {
-            private WebView webView;
-            @Override
-            protected void onCreate(Bundle savedInstanceState) {
-                super.onCreate(savedInstanceState);
-                webView = new WebView(this);
-                webView.getSettings().setJavaScriptEnabled(true);
-                webView.setWebViewClient(new WebViewClient());
-                webView.loadUrl("file:///android_asset/index.html");
-                setContentView(webView);
-            }
-            @Override
-            public void onBackPressed() {
-                if (webView.canGoBack()) {
-                    webView.goBack();
-                } else {
-                    super.onBackPressed();
-                }
-            }
-        }
+        cat << 'EOF' > myapp/settings.gradle
+        rootProject.name = "MyApp"
+        include ':app'
         EOF
 
-        # Create build.gradle
-        cat << 'EOF' > android-app/build.gradle
+        cat << 'EOF' > myapp/build.gradle
         buildscript {
             repositories {
                 google()
                 mavenCentral()
             }
             dependencies {
-                classpath 'com.android.tools.build:gradle:8.2.0'
+                classpath 'com.android.tools.build:gradle:7.4.2'
             }
         }
         allprojects {
@@ -103,28 +95,17 @@ jobs:
         }
         EOF
 
-        cat << 'EOF' > android-app/settings.gradle
-        rootProject.name = "MyDigitalWorld"
-        include ':app'
-        EOF
-
-        cat << 'EOF' > android-app/app/build.gradle
-        plugins {
-            id 'com.android.application'
-        }
+        cat << 'EOF' > myapp/app/build.gradle
+        apply plugin: 'com.android.application'
         android {
-            namespace 'com.my.digitalworld'
-            compileSdk 34
+            namespace 'com.web.app'
+            compileSdkVersion 33
             defaultConfig {
-                applicationId "com.my.digitalworld"
-                minSdk 21
-                targetSdk 34
+                applicationId "com.web.app"
+                minSdkVersion 21
+                targetSdkVersion 33
                 versionCode 1
                 versionName "1.0"
-            }
-            compileOptions {
-                sourceCompatibility JavaVersion.VERSION_17
-                targetCompatibility JavaVersion.VERSION_17
             }
         }
         dependencies {
@@ -132,11 +113,10 @@ jobs:
         }
         EOF
 
-    - name: Build APK with Gradle
+    - name: Build APK
       run: |
-        cd android-app
+        cd myapp
         chmod +x gradlew || true
-        # Use gradle wrapper or download gradle if needed
         gradle wrapper
         ./gradlew assembleDebug
 
@@ -144,4 +124,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: my-app-apk
-        path: android-app/app/build/outputs/apk/debug/app-debug.apk
+        path: myapp/app/build/outputs/apk/debug/app-debug.apk
